@@ -71,38 +71,3 @@ export const useDeleteDish = () => {
         },
     });
 };
-
-export const useDrinks = () => useQuery({
-    queryKey: ['drinks'],
-    queryFn: () => fromSupabase(supabase.from('drinks').select('*')),
-});
-
-export const useAddDrink = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (newDrink) => fromSupabase(supabase.from('drinks').insert([newDrink])),
-        onSuccess: () => {
-            queryClient.invalidateQueries('drinks');
-        },
-    });
-};
-
-export const useUpdateDrink = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (updatedDrink) => fromSupabase(supabase.from('drinks').update(updatedDrink).eq('id', updatedDrink.id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('drinks');
-        },
-    });
-};
-
-export const useDeleteDrink = () => {
-    const queryClient = useQueryClient();
-    return useMutation({
-        mutationFn: (id) => fromSupabase(supabase.from('drinks').delete().eq('id', id)),
-        onSuccess: () => {
-            queryClient.invalidateQueries('drinks');
-        },
-    });
-};

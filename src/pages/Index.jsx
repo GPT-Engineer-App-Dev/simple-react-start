@@ -1,4 +1,5 @@
-import { Container, Text, VStack, Box, Flex, Spacer, IconButton, useColorMode, useColorModeValue } from "@chakra-ui/react";
+import { Container, Text, VStack, Box, Flex, Spacer, IconButton, useColorMode, useColorModeValue, Button } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const Index = () => {
@@ -24,6 +25,9 @@ const Index = () => {
         <VStack spacing={4}>
           <Text fontSize="2xl">Your Blank Canvas</Text>
           <Text>Chat with the agent to start making edits.</Text>
+        <Link to="/dishes">
+            <Button>Go to Dishes</Button>
+          </Link>
         </VStack>
       </Container>
     </Container>

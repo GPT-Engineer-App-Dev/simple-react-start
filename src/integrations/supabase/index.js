@@ -71,3 +71,26 @@ export const useDeleteDish = () => {
         },
     });
 };
+
+// Insert popular American dishes directly into the Supabase client
+const insertPopularAmericanDishes = async () => {
+    const dishes = [
+        { name: 'Hamburger', country: 'USA', size: 'Medium', type: 'Main Course', price: 8.00 },
+        { name: 'Hot Dog', country: 'USA', size: 'Small', type: 'Main Course', price: 5.00 },
+        { name: 'Mac and Cheese', country: 'USA', size: 'Medium', type: 'Main Course', price: 7.00 },
+        { name: 'Buffalo Wings', country: 'USA', size: 'Small', type: 'Appetizer', price: 6.00 },
+        { name: 'Clam Chowder', country: 'USA', size: 'Small', type: 'Soup', price: 9.00 },
+        { name: 'BBQ Ribs', country: 'USA', size: 'Large', type: 'Main Course', price: 15.00 },
+        { name: 'Apple Pie', country: 'USA', size: 'Medium', type: 'Dessert', price: 4.50 },
+        { name: 'Cheesecake', country: 'USA', size: 'Medium', type: 'Dessert', price: 5.00 },
+        { name: 'Fried Chicken', country: 'USA', size: 'Medium', type: 'Main Course', price: 10.00 },
+        { name: 'Pancakes', country: 'USA', size: 'Medium', type: 'Breakfast', price: 6.50 },
+    ];
+
+    for (const dish of dishes) {
+        await fromSupabase(supabase.from('dishes').insert([dish]));
+    }
+};
+
+// Call the function to insert the dishes
+insertPopularAmericanDishes().catch(console.error);

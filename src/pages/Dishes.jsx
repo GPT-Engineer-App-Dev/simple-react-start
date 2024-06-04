@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDishes, useAddDish, useUpdateDish, useDeleteDish } from "../integrations/supabase/index.js";
 import { Box, Button, Input, Table, Tbody, Td, Th, Thead, Tr, VStack, HStack, Text } from "@chakra-ui/react";
 
@@ -10,6 +10,25 @@ const Dishes = () => {
 
   const [newDish, setNewDish] = useState({ name: "", country: "", size: "", type: "", price: "" });
   const [editingDish, setEditingDish] = useState(null);
+
+  useEffect(() => {
+    const popularAmericanDishes = [
+      { name: 'Hamburger', country: 'USA', size: 'Medium', type: 'Main Course', price: 8.00 },
+      { name: 'Hot Dog', country: 'USA', size: 'Small', type: 'Main Course', price: 5.00 },
+      { name: 'Mac and Cheese', country: 'USA', size: 'Medium', type: 'Main Course', price: 7.00 },
+      { name: 'Buffalo Wings', country: 'USA', size: 'Small', type: 'Appetizer', price: 6.00 },
+      { name: 'Clam Chowder', country: 'USA', size: 'Small', type: 'Soup', price: 9.00 },
+      { name: 'BBQ Ribs', country: 'USA', size: 'Large', type: 'Main Course', price: 15.00 },
+      { name: 'Apple Pie', country: 'USA', size: 'Medium', type: 'Dessert', price: 4.50 },
+      { name: 'Cheesecake', country: 'USA', size: 'Medium', type: 'Dessert', price: 5.00 },
+      { name: 'Fried Chicken', country: 'USA', size: 'Medium', type: 'Main Course', price: 10.00 },
+      { name: 'Pancakes', country: 'USA', size: 'Medium', type: 'Breakfast', price: 6.50 },
+    ];
+
+    popularAmericanDishes.forEach(dish => {
+      addDish.mutate(dish);
+    });
+  }, [addDish]);
 
   const handleAddDish = () => {
     addDish.mutate(newDish);
